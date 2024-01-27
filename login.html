@@ -54,15 +54,44 @@
 
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
-    <form method="post">
-        <input type="text" name="usuario" placeholder="Usuario" required>
+    <form id="loginForm">
+        <input type="text" name="usuario" id="usuario" placeholder="Correo Electrónico" required>
         <br>
-        <input type="password" name="contrasena" placeholder="Contraseña" required>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
         <br>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="button" onclick="validarCampos()">Validar Campos</button>
     </form>
 </div>
-<script src="Login.js">
-    </script>
+
+<script>
+    function validarCampos() {
+        // Obtener los valores del formulario
+        const usuario = document.getElementById('usuario').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        // Validar longitud mínima de 8 caracteres para la contraseña
+        if (contrasena.length < 8) {
+            alert('La contraseña debe tener al menos 8 caracteres.');
+            return;
+        }
+
+        // Validar longitud máxima de 8 caracteres para la contraseña
+        if (contrasena.length > 8) {
+            alert('La contraseña no puede tener más de 8 caracteres.');
+            return;
+        }
+
+        // Validar el formato del correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(usuario)) {
+            alert('Por favor, ingresa un correo electrónico válido.');
+            return;
+        }
+
+        alert('Campos validados correctamente.');
+        // Puedes realizar otras acciones después de la validación
+    }
+</script>
+
 </body>
 </html>
