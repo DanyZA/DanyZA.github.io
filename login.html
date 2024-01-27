@@ -87,6 +87,17 @@
             alert('Por favor, ingresa un correo electrónico válido.');
             return;
         }
+        // Validar que la contraseña contenga al menos una letra mayúscula
+        if (!/[A-Z]/.test(contrasena)) {
+            alert('La contraseña debe contener al menos una letra mayúscula.');
+            return;
+        }
+
+        // Validar que la contraseña contenga al menos un carácter especial
+        if (!/[@$!%*?&#]/.test(contrasena)) {
+            alert('La contraseña debe contener al menos un carácter especial (@, $, !, %, *, ?, #, etc.).');
+            return;
+        }
 
         alert('Campos validados correctamente.');
         // Puedes realizar otras acciones después de la validación
