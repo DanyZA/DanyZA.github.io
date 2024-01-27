@@ -54,12 +54,12 @@
 
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
+    <form id="loginForm" onsubmit="return validarCampos()">
         <input type="text" name="usuario" id="usuario" placeholder="Correo Electrónico" required>
         <br>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
         <br>
-        <button type="submit" onclick="validarCampos()">Validar Campos</button>
+    <button type="submit" >Validar Campos</button>
     </form>
 </div>
 
