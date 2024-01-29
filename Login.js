@@ -1,49 +1,33 @@
+// validaciones.js
+function validarLogin() {
+    var email = document.getElementById('email').value;
+    var contrasena = document.getElementById('contrasena').value;
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
+    // Verificar si algún campo está vacío
+    if (email.trim() === '' || contrasena.trim() === '') {
+        alert('Ambos campos son obligatorios. Por favor, complete todos los campos.');
+        event.preventDefault(); // previene que se envie la peticion al servidor
+        return false;
+    }
 
-        form.addEventListener('submit', function (event) {
-            // Obtener los valores del formulario
-            const usuario = form.querySelector('[name="usuario"]').value.trim();
-            const contrasena = form.querySelector('[name="contrasena"]').value.trim();
+    // Verificar longitud mínima y caracter especial en la contraseña
+    if (contrasena.length < 8 || !/[!@#$%^&*(),.?":{}|<>]/.test(contrasena)) {
+        alert('La contraseña debe tener al menos 8 caracteres y contener al menos un caracter especial.');
+        event.preventDefault(); // previene que se envie la peticion al servidor
+        return false;
+        
+    }
 
-            // Validar que los campos no estén vacíos
-            if (usuario === '' || contrasena === '') {
-                alert('Por favor, completa todos los campos.');
-                event.preventDefault(); // Evitar el envío del formulario
-            }
-            // Validar longitud mínima de 8 caracteres para la contraseña
-        if (contrasena.length < 8) {
-            alert('La contraseña debe tener al menos 8 caracteres.');
-            return false;
-        }
+    // Verificar si el email tiene un formato válido (usando una expresión regular simple)
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Por favor, ingrese un correo electrónico válido.');
+        event.preventDefault(); // previene que se envie la peticion al servidor
+        return false;
+        
+    }
 
-        // Validar longitud máxima de 8 caracteres para la contraseña
-        if (contrasena.length >= 16) {
-            alert('La contraseña no puede tener más de 8 caracteres.');
-            return false;
-        }
-
-        // Validar el formato del correo electrónico
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(usuario)) {
-            alert('Por favor, ingresa un correo electrónico válido.');
-            return false;
-        }
-        // Validar que la contraseña contenga al menos una letra mayúscula
-        if (!/[A-Z]/.test(contrasena)) {
-            alert('La contraseña debe contener al menos una letra mayúscula.');
-            return false;
-        }
-
-        // Validar que la contraseña contenga al menos un carácter especial
-        if (!/[@$!%*?&#]/.test(contrasena)) {
-            alert('La contraseña debe contener al menos un carácter especial (@, $, !, %, *, ?, #, etc.).');
-            return false;
-        }
-
-        alert('Campos validados correctamente.');
-        // Puedes realizar otras acciones después de la validación
-        });
-    });
-
+    // Si todas las validaciones pasan, permitir el envío del formulario
+    
+    return true;
+}
